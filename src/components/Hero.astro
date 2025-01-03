@@ -1,6 +1,23 @@
+---
+import Countdown from "./Countdown.astro";
+---
+
 <section class="my-6">
   <audio controls loop>
-    <source src="../assets/cambiar-de-vida.mp3" type="audio/mpeg" />
+    <source src="src/assets/cambiar-de-vida.mp3" type="audio/mpeg" />
     Tu navegador no soporta la reproducción de audio.
   </audio>
+
+  <h3
+    class="pinyon-script-regular text-gray-700 text-5xl sm:text-6xl text-center w-full mt-8 font-semibold"
+  >
+    Estás invitado!
+  </h3>
+  <p
+    class="lato-bold text-pretty text-lg sm:text-2xl text-center w-full mt-4 text-gray-500"
+  >
+    Queremos que seas parte <br /> de este momento tan especial
+  </p>
+
+  <Countdown />
 </section>
