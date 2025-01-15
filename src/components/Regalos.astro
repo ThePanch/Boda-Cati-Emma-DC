@@ -1,0 +1,63 @@
+---
+const cbu = "0000003100096807462073"; // Reemplaza con el CBU real de los novios
+---
+
+<section
+  class="flex flex-col justify-center items-center px-4 py-10 bg-[#FEFBE6] w-full"
+>
+  <img src="/iconos/regalo.png" alt="icono de regalo" class="w-12 h-12 mb-2" />
+  <h1 class="mb-1 poppins-bold font-bold text-xl text-[#BF9066]">REGALO</h1>
+  <p
+    class="poppins-light font-light text-sm text-center mt-2 text-[#24211D] mb-5"
+  >
+    Lo más importante es tu presencia, <br /> pero si deseas hacernos un regalo,
+    <br /> aquí tienes nuestros datos.
+  </p>
+
+  <pre class="hidden">
+    <p>{cbu}</p>
+</pre>
+  <button
+    class="buttonCopiar poppins-medium font-medium text-sm w-48 h-7 rounded-full bg-[#CBB79F] text-[#FEFBE6] flex justify-center items-center"
+    >COPIAR CBU</button
+  >
+</section>
+
+<script>
+  // Obtenemos los bloques de código "<pre>"
+  let blocks = document.querySelectorAll("pre");
+
+  // Implementamos una acción para cada bloque
+  blocks.forEach(async (block) => {
+    if (navigator.clipboard) {
+      // Creamos un botón
+      const button = document.querySelector(
+        ".buttonCopiar"
+      ) as HTMLButtonElement;
+
+      if (!button) {
+        return;
+      }
+
+      // Establecemos un evento para que se ejecute al hacer clic
+      button.addEventListener("click", async () => {
+        // Buscamos los <p> dentro del bloque y guardamos su texto.
+        let p = block.querySelector("p");
+        let text = p!.innerText;
+
+        // Copiamos el texto utilizando la API
+        await navigator.clipboard.writeText(text);
+
+        // ¡Copiado!
+        button.innerText = "¡CBU Copiado!";
+        button.style.backgroundColor = "#008000";
+        button.style.opacity = "0.7";
+        setTimeout(() => {
+          button.innerText = "COPIAR CBU";
+          button.style.backgroundColor = "#CBB79F";
+          button.style.opacity = "1";
+        }, 1000);
+      });
+    }
+  });
+</script>
