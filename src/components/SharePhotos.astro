@@ -21,6 +21,7 @@ import { CldUploadWidget } from "astro-cloudinary";
       sources: ["local", "camera"],
       multiple: true,
       maxFiles: 10,
+      maxFileSize: 50 * 1024 * 1024,
       language: "es",
       text: {
         es: {
@@ -29,7 +30,7 @@ import { CldUploadWidget } from "astro-cloudinary";
             files: "Subir desde tu dispositivo",
           },
           local: {
-            browse: "Seleccionar",
+            browse: "Seleccionar máximo 10 imágenes",
             dd_title_single: "Arrastra tu imagen aquí",
             drop_title_single: "Suelta tu imagen aquí",
           },
@@ -46,7 +47,7 @@ import { CldUploadWidget } from "astro-cloudinary";
           link: "#BF9066", // Color de enlaces
           action: "#24211D", // Botón principal (acción)
           inProgress: "#CBB79F", // Barra de progreso
-          complete: "#BF9066", // Indicador de progreso completado
+          // complete: "#BF9066", // Indicador de progreso completado
           error: "#FF5C5C", // Indicador de error
           textDark: "#24211D", // Color del texto oscuro
           textLight: "#FEFBE6", // Color del texto claro
