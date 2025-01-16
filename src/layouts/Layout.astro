@@ -1,3 +1,7 @@
+---
+import { ViewTransitions } from "astro:transitions";
+---
+
 <!doctype html>
 <html lang="es">
   <head>
@@ -31,6 +35,7 @@ San Francisco de Sales"
     />
 
     <link rel="stylesheet" href="/src/styles/global.css" />
+    <ViewTransitions />
   </head>
   <body class="w-full flex flex-col items-center">
     <slot />

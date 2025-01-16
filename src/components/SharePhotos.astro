@@ -21,8 +21,8 @@ import { CldUploadWidget } from "astro-cloudinary";
       sources: ["local", "camera"],
       multiple: true,
       maxFiles: 10,
-      maxFileSize: 50 * 1024 * 1024,
       language: "es",
+      showPoweredBy: false,
       text: {
         es: {
           or: "o",
@@ -30,7 +30,7 @@ import { CldUploadWidget } from "astro-cloudinary";
             files: "Subir desde tu dispositivo",
           },
           local: {
-            browse: "Seleccionar máximo 10 imágenes",
+            browse: "Subir 1 foto de máximo 10MB",
             dd_title_single: "Arrastra tu imagen aquí",
             drop_title_single: "Suelta tu imagen aquí",
           },
@@ -76,3 +76,21 @@ import { CldUploadWidget } from "astro-cloudinary";
     >VER FOTOS SUBIDAS</a
   >
 </section>
+
+<script>
+  import { navigate } from "astro:transitions/client";
+
+  const widget = document.getElementById("upload-widget");
+
+  if (widget) {
+    widget.addEventListener("clduploadwidget:success", ((
+      e: CustomEvent<{
+        info: {
+          public_id: string;
+        };
+      }>
+    ) => {
+      navigate("/fotos");
+    }) as EventListener);
+  }
+</script>

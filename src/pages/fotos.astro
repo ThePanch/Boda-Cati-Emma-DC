@@ -1,7 +1,27 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { CldImage } from "astro-cloudinary";
+import { getCollection } from "astro:content";
+const fotos = await getCollection("fotos");
 ---
 
 <Layout>
   <h1>Fotos</h1>
+  {
+    fotos.map((foto) => {
+      return (
+        <div class="h-64 w-64 m-2">
+          <CldImage
+            src={foto.data.public_id}
+            width={foto.data.width}
+            height={foto.data.height}
+            crop={{
+              type: "fill",
+              source: true,
+            }}
+          />
+        </div>
+      );
+    })
+  }
 </Layout>
