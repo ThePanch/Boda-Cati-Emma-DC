@@ -3,7 +3,7 @@ import { cldAssetsLoader } from "astro-cloudinary/loaders";
 
 const fotos = defineCollection({
   loader: cldAssetsLoader({
-    limit: 50,
+    limit: 60,
     folder: "boda",
   }),
 });
