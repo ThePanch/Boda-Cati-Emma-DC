@@ -1,3 +1,7 @@
+---
+import { CldUploadWidget } from "astro-cloudinary";
+---
+
 <section
   class="flex flex-col justify-center items-center px-4 py-8 bg-[#BF9066] w-full"
 >
@@ -10,11 +14,61 @@
   >
     Sube fotos de la boda al album
   </p>
-
-  <button
-    class="poppins-medium font-medium text-sm w-[219px] h-7 text-[#FEFBE6] border-2 border-[#FEFBE6] flex justify-center items-center"
-    >SUBIR FOTOS</button
+  <CldUploadWidget
+    uploadPreset="upload-images-boda"
+    id="upload-widget"
+    options={{
+      sources: ["local", "camera"],
+      multiple: true,
+      maxFiles: 10,
+      language: "es",
+      text: {
+        es: {
+          or: "o",
+          menu: {
+            files: "Subir desde tu dispositivo",
+          },
+          local: {
+            browse: "Seleccionar",
+            dd_title_single: "Arrastra tu imagen aquí",
+            drop_title_single: "Suelta tu imagen aquí",
+          },
+        },
+      },
+      styles: {
+        palette: {
+          window: "#FEFBE6", // Fondo de la ventana emergente
+          sourceBg: "#BF9066", // Fondo detrás de los íconos de carga
+          windowBorder: "#CBB79F", // Color del borde
+          tabIcon: "#CBB79F", // Íconos de pestañas
+          inactiveTabIcon: "#CBB79F", // Íconos de pestañas inactivas
+          menuIcons: "#24211D", // Color de los íconos del menú
+          link: "#BF9066", // Color de enlaces
+          action: "#24211D", // Botón principal (acción)
+          inProgress: "#CBB79F", // Barra de progreso
+          complete: "#BF9066", // Indicador de progreso completado
+          error: "#FF5C5C", // Indicador de error
+          textDark: "#24211D", // Color del texto oscuro
+          textLight: "#FEFBE6", // Color del texto claro
+        },
+        frame: {
+          background: "#FEFBE6", // Fondo del área de carga
+        },
+        fonts: {
+          default: {
+            active: true, // Activar fuente personalizada
+            url: "https://fonts.googleapis.com/css2?family=Marcellus&display=swap", // Fuente elegante de Google Fonts
+            family: "Marcellus, serif", // Fuente para títulos y textos
+          },
+        },
+      },
+    }}
   >
+    <button
+      class="poppins-medium font-medium text-sm w-[219px] h-7 text-[#FEFBE6] border-2 border-[#FEFBE6] flex justify-center items-center"
+      >SUBIR FOTOS</button
+    >
+  </CldUploadWidget>
   <a
     href="/fotos"
     class="mt-4 poppins-medium font-medium text-sm w-[219px] h-7 text-[#FEFBE6] border-2 border-[#FEFBE6] flex justify-center items-center"
