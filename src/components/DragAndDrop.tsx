@@ -9,7 +9,7 @@ export const DragAndDrop = () => {
     const formData = new FormData();
 
     formData.append("file", foto);
-    console.log(foto);
+    // console.log(foto);
 
     const res = await fetch("/api/upload", {
       method: "POST",
@@ -22,8 +22,13 @@ export const DragAndDrop = () => {
     }
 
     const json = await res.json();
-    console.log(json);
-    setEstado("Foto subida correctamente");
+    const url = json.url.secure_url;
+
+    const resCargarFoto = await fetch("http://localhost:3000/api/fotos", {
+      method: "POST",
+      body: JSON.stringify({ url: url }),
+    });
+    console.log(resCargarFoto);
 
     navigate("/fotos");
   }
