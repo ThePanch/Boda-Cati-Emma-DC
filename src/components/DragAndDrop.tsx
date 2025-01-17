@@ -21,6 +21,10 @@ export const DragAndDrop = () => {
       return;
     }
 
+    const json = await res.json();
+    console.log(json);
+    setEstado("Foto subida correctamente");
+
     navigate("/fotos");
   }
 
