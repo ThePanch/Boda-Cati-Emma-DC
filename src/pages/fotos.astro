@@ -2,10 +2,40 @@
 export const prerender = false;
 // import { Album } from "../components/Album.tsx";
 import Layout from "../layouts/Layout.astro";
+import { v2 as cloudinary } from "cloudinary";
+
+cloudinary.config({
+  cloud_name: "pancho",
+  api_key: "983554942665456",
+  api_secret: import.meta.env.CLOUDINARY_API_SECRET,
+});
+
+const fotos = await cloudinary.api.resources(
+  {
+    type: "upload",
+    prefix: "boda", // add your folder
+  },
+  function (error, result) {
+    // console.log(result);
+    // const data = result.resources;
+    // return data;
+  }
+);
+
+const result = fotos.resources;
 ---
 
 <Layout>
-  <h1>Boda</h1>
+  <h1>Fotos de la Boda</h1>
+  {
+    result.map((foto: any) => {
+      return (
+        <div class="h-64 w-64 m-2">
+          <img src={foto.secure_url} width={foto.width} height={foto.height} />
+        </div>
+      );
+    })
+  }
   <!-- <Album /> -->
   <!-- {
     fotos.map((foto) => {
