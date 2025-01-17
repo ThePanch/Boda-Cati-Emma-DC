@@ -21,20 +21,6 @@ export const DragAndDrop = () => {
       return;
     }
 
-    const json = await res.json();
-    const url = json.url.secure_url;
-
-    console.log(JSON.stringify({ url: url }));
-
-    const resCargarFoto = await fetch(
-      "https://manso-editorial-backend.vercel.app/api/fotos",
-      {
-        method: "POST",
-        body: JSON.stringify({ url: url }),
-      }
-    );
-    console.log(resCargarFoto);
-
     navigate("/fotos");
   }
 
