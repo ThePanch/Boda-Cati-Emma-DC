@@ -1,14 +1,25 @@
 import { navigate } from "astro:transitions/client";
-import React, { type ChangeEvent } from "react";
+import React, { useState, type ChangeEvent } from "react";
 
 export const DragAndDrop = () => {
-  function handleClick(e: ChangeEvent<HTMLInputElement>) {
+  const [estado, setEstado] = useState("");
+  async function handleClick(e: ChangeEvent<HTMLInputElement>) {
     const target = e.target as any;
     const foto = target.files[0];
     const formData = new FormData();
 
     formData.append("file", foto);
     console.log(foto);
+
+    const res = await fetch("/api/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!res.ok) {
+      setEstado("Error al subir la foto");
+      return;
+    }
 
     navigate("/fotos");
   }
