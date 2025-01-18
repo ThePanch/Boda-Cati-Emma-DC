@@ -23,8 +23,8 @@ export const DragAndDrop = () => {
       setError(true);
       setTimeout(() => {
         setError(false);
+        setLoading(false);
       }, 2000);
-      setLoading(false);
       return;
     }
 

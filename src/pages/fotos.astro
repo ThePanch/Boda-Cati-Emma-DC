@@ -21,29 +21,33 @@ const result = fotos.resources;
 ---
 
 <Layout>
-  <a
-    href="/#compartir-fotos"
-    class="absolute top-4 left-4 flex gap-1 text-[#CBB79F] cursor-pointer hover:scale-105"
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-left"
-      ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
-        d="M5 12l14 0"></path><path d="M5 12l6 6"></path><path d="M5 12l6 -6"
-      ></path></svg
+  <main class="w-screen-2xl justify-center items-center flex flex-col">
+    <a
+      href="/#compartir-fotos"
+      class="absolute top-4 left-4 flex gap-1 text-[#CBB79F] cursor-pointer hover:scale-105"
     >
-    <p class="font-semibold poppins-semibold hidden md:block">Volver</p>
-  </a>
-  <h1 class="mt-12 uppercase alice-regular font-medium text-2xl text-[#BF9066]">
-    Fotos de nuestra Boda
-  </h1>
-  <Galeria fotos={result} />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-left"
+        ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
+          d="M5 12l14 0"></path><path d="M5 12l6 6"></path><path d="M5 12l6 -6"
+        ></path></svg
+      >
+      <p class="font-semibold poppins-semibold hidden md:block">Volver</p>
+    </a>
+    <h1
+      class="mt-12 uppercase alice-regular font-medium text-2xl text-[#BF9066]"
+    >
+      Fotos de nuestra Boda
+    </h1>
+    <Galeria fotos={result} />
+  </main>
 </Layout>
