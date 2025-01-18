@@ -4,6 +4,7 @@ import React, { useState, type ChangeEvent } from "react";
 export const DragAndDrop = () => {
   const [loading, setLoading] = useState(false);
   const [cargada, setCargada] = useState(false);
+  const [error, setError] = useState(false);
   async function handleClick(e: ChangeEvent<HTMLInputElement>) {
     setLoading(true);
     const target = e.target as any;
@@ -20,7 +21,10 @@ export const DragAndDrop = () => {
 
     if (!res.ok) {
       setLoading(false);
-      setCargada(false);
+      setError(true);
+      setTimeout(() => {
+        setError(false);
+      }, 2000);
       return;
     }
 
@@ -89,29 +93,58 @@ export const DragAndDrop = () => {
                 </span>
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center text-[#008000] py-1.5">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="28"
-                  height="28"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="icon icon-tabler icons-tabler-outline icon-tabler-photo-check "
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path d="M15 8h.01" />
-                  <path d="M11.5 21h-5.5a3 3 0 0 1 -3 -3v-12a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v7" />
-                  <path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l4 4" />
-                  <path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l.5 .5" />
-                  <path d="M15 19l2 2l4 -4" />
-                </svg>
-                <span className="poppins-light text-xs text-[#BF9066] mt-3">
-                  Foto cargada correctamente
-                </span>
+              <div>
+                {error ? (
+                  <div className="flex flex-col items-center justify-center ">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="32"
+                      height="32"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      className="icon icon-tabler icons-tabler-outline icon-tabler-alert-circle"
+                      style={{ fill: "red", color: "white" }}
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
+                      <path d="M12 8v4" />
+                      <path d="M12 16h.01" />
+                    </svg>
+                    <span className="poppins-light text-sm  text-[#ef4444] mt-1">
+                      Error al subir foto, <br />
+                      pesa más de 10MB
+                    </span>
+                  </div>
+                ) : (
+                  <div className="flex flex-col items-center justify-center text-[#008000] py-1.5">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="icon icon-tabler icons-tabler-outline icon-tabler-photo-check "
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M15 8h.01" />
+                      <path d="M11.5 21h-5.5a3 3 0 0 1 -3 -3v-12a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v7" />
+                      <path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l4 4" />
+                      <path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l.5 .5" />
+                      <path d="M15 19l2 2l4 -4" />
+                    </svg>
+                    <span className="poppins-light text-xs text-[#BF9066] mt-3">
+                      Foto cargada correctamente
+                    </span>
+                  </div>
+                )}
               </div>
             )}
           </div>
