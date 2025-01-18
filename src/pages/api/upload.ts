@@ -40,7 +40,7 @@ export const POST: APIRoute = async ({ request }) => {
     const webpBuffer = await sharp(uint8Array)
       .webp({
         lossless: true,
-        quality: 100,
+        quality: 40,
       })
       .toBuffer();
 

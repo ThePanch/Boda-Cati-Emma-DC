@@ -21,8 +21,10 @@ export const DragAndDrop = () => {
 
     if (!res.ok) {
       setError(true);
+      setCargada(true);
       setTimeout(() => {
         setError(false);
+        setCargada(false);
         setLoading(false);
       }, 2000);
       return;
@@ -70,7 +72,7 @@ export const DragAndDrop = () => {
           </div>
         ) : (
           <div role="status" className=" py-7">
-            {!cargada ? (
+            {!cargada && loading ? (
               <div className="flex flex-col h-full w-full items-center justify-center">
                 <svg
                   aria-hidden="true"
@@ -94,7 +96,7 @@ export const DragAndDrop = () => {
               </div>
             ) : (
               <div>
-                {error ? (
+                {error && cargada ? (
                   <div className="flex flex-col items-center justify-center ">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
