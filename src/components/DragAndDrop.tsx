@@ -116,7 +116,7 @@ export const DragAndDrop = () => {
                       <path d="M12 8v4" />
                       <path d="M12 16h.01" />
                     </svg>
-                    <span className="poppins-light text-sm  text-[#ef4444] mt-1">
+                    <span className="poppins-light text-sm text-center  text-[#ef4444] mt-1">
                       Error al subir foto, <br />
                       pesa más de 10MB
                     </span>
