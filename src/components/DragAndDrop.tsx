@@ -20,11 +20,11 @@ export const DragAndDrop = () => {
     });
 
     if (!res.ok) {
-      setLoading(false);
       setError(true);
       setTimeout(() => {
         setError(false);
       }, 2000);
+      setLoading(false);
       return;
     }
 
