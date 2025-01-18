@@ -1,6 +1,5 @@
 ---
-export const prerender = false;
-// import { Album } from "../components/Album.tsx";
+import Galeria from "../components/Galeria.astro";
 import Layout from "../layouts/Layout.astro";
 import { v2 as cloudinary } from "cloudinary";
 
@@ -13,45 +12,38 @@ cloudinary.config({
 const fotos = await cloudinary.api.resources(
   {
     type: "upload",
-    prefix: "boda", // add your folder
+    prefix: "casamientoCatiEmma",
   },
-  function (error, result) {
-    // console.log(result);
-    // const data = result.resources;
-    // return data;
-  }
+  function (error, result) {}
 );
 
 const result = fotos.resources;
 ---
 
 <Layout>
-  <h1>Fotos de la Boda</h1>
-  {
-    result.map((foto: any) => {
-      return (
-        <div class="m-2">
-          <img src={foto.secure_url} width={foto.width} height={foto.height} />
-        </div>
-      );
-    })
-  }
-  <!-- <Album /> -->
-  <!-- {
-    fotos.map((foto) => {
-      return (
-        <div class="h-64 w-64 m-2">
-          <CldImage
-            src={foto.data.public_id}
-            width={foto.data.width}
-            height={foto.data.height}
-            crop={{
-              type: "fill",
-              source: true,
-            }}
-          />
-        </div>
-      );
-    })
-  } -->
+  <a
+    href="/"
+    class="absolute top-4 left-4 flex gap-1 text-[#CBB79F] cursor-pointer hover:scale-105"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-left"
+      ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
+        d="M5 12l14 0"></path><path d="M5 12l6 6"></path><path d="M5 12l6 -6"
+      ></path></svg
+    >
+    <p class="font-semibold poppins-semibold hidden md:block">Volver</p>
+  </a>
+  <h1 class="mt-6 poppins-bold font-bold text-xl text-[#BF9066]">
+    Fotos de la Boda
+  </h1>
+  <Galeria fotos={result} />
 </Layout>

@@ -1,0 +1,47 @@
+---
+import "photoswipe/style.css";
+
+const { fotos } = Astro.props;
+---
+
+<div
+  id="gallery"
+  class="grid grid-cols-3 gap-2 sm:gap-8 max-w-5xl mx-auto px-4 py-10 items-center"
+>
+  {
+    fotos.map((foto: any) => (
+      <a
+        href={foto.secure_url}
+        target="_blank"
+        class="group rounded-xl hover:scale-105 transition-all relative object-cover"
+        data-pswp-width={foto.width}
+        data-pswp-height={foto.height}
+      >
+        <img
+          loading="lazy"
+          src={foto.secure_url}
+          alt={foto.public_id}
+          class="blur-md absolute inset-0 -z-10 transition-all group-hover:contrast-150 opacity-70 "
+        />
+        <img
+          loading="lazy"
+          src={foto.secure_url}
+          alt={foto.public_id}
+          class="rounded-xl "
+        />
+      </a>
+    ))
+  }
+</div>
+
+<script>
+  import PhotoSwipeLightbox from "photoswipe/lightbox";
+
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: "#gallery",
+    children: "a",
+    pswpModule: () => import("photoswipe"),
+  });
+
+  lightbox.init();
+</script>
