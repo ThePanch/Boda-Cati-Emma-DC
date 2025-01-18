@@ -35,41 +35,12 @@ export const POST: APIRoute = async ({ request }) => {
   const arrayBuffer = await fotoApi.arrayBuffer();
   const uint8Array = new Uint8Array(arrayBuffer);
 
-  try {
-    // Convertimos la imagen usando sharp
-    const webpBuffer = await sharp(uint8Array)
-      .webp({
-        lossless: true,
-        quality: 10,
-      })
-      .toBuffer();
+  const result = await uploadStream(uint8Array, {
+    folder: "casamientoCatiEmma",
+  });
+  console.log(result);
 
-    const newuint8Array = new Uint8Array(webpBuffer);
+  const url = result;
 
-    // Ahora subimos la imagen procesada (convertida a WebP) a Cloudinary
-    const result = await uploadStream(newuint8Array, {
-      folder: "casamientoCatiEmma",
-    });
-
-    console.log(result);
-
-    return new Response(JSON.stringify({ url: result }), {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  } catch (error) {
-    console.error("Error al procesar la imagen:", error);
-    return new Response("Error al procesar la imagen", { status: 500 });
-  }
-
-  // const result = await uploadStream(unit8Array, {
-  //   folder: "casamientoCatiEmma",
-  // });
-  // console.log(result);
-
-  // const url = result;
-
-  // return new Response(JSON.stringify({ url }));
+  return new Response(JSON.stringify({ url }));
 };
