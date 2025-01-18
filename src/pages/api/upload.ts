@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { v2 as cloudinary } from "cloudinary";
+import sharp from "sharp";
 
 cloudinary.config({
   cloud_name: "pancho",
@@ -32,14 +33,43 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   const arrayBuffer = await fotoApi.arrayBuffer();
-  const unit8Array = new Uint8Array(arrayBuffer);
+  const uint8Array = new Uint8Array(arrayBuffer);
 
-  const result = await uploadStream(unit8Array, {
-    folder: "casamientoCatiEmma",
-  });
-  console.log(result);
+  try {
+    // Convertimos la imagen usando sharp
+    const webpBuffer = await sharp(uint8Array)
+      .webp({
+        lossless: true,
+        quality: 100,
+      })
+      .toBuffer();
 
-  const url = result;
+    const newuint8Array = new Uint8Array(webpBuffer);
 
-  return new Response(JSON.stringify({ url }));
+    // Ahora subimos la imagen procesada (convertida a WebP) a Cloudinary
+    const result = await uploadStream(newuint8Array, {
+      folder: "casamientoCatiEmma",
+    });
+
+    console.log(result);
+
+    return new Response(JSON.stringify({ url: result }), {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    console.error("Error al procesar la imagen:", error);
+    return new Response("Error al procesar la imagen", { status: 500 });
+  }
+
+  // const result = await uploadStream(unit8Array, {
+  //   folder: "casamientoCatiEmma",
+  // });
+  // console.log(result);
+
+  // const url = result;
+
+  // return new Response(JSON.stringify({ url }));
 };
